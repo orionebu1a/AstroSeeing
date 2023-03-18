@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_seeing"
+        android:name="com.example.astroseeing.Seeing"
+        android:label="fragment_seeing"
+        tools:layout="@layout/fragment_seeing" />
+    <fragment
+        android:id="@+id/navigation_light_pollution"
+        android:name="com.example.astroseeing.Light_polution"
+        android:label="fragment_light_polution"
+        tools:layout="@layout/fragment_light_polution" />
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.astroseeing.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+</navigation>
