@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -43,12 +44,15 @@ public class MainActivity extends AppCompatActivity {
     public String request;
     public String WeekNumber;
     public int count;
+    private int show_hours = 20;
+
+    private ArrayList<ArrayList<String>> table = new ArrayList();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Getting getting = new Getting();
+        Getting getting = new Getting(table);
         getting.execute();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bot_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -79,6 +83,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class Getting extends AsyncTask<String, String, String> {
+        private ArrayList<ArrayList<String>> table;
+
+        public Getting(ArrayList<ArrayList<String>> table) {
+            super();
+            this.table = table;
+        }
+
+        protected void writeTable(Element tab){
+            Elements rows = tab.select("tr");
+            for (int i = 3; i <= show_hours; i++) { //first row is the col names so skip it.
+                Element row = rows.get(i);
+                Elements cols = row.select("td");
+                ArrayList<String> rowStr = new ArrayList<>();
+                for (int j = 1; j <= 12; j++) {
+                    cols.get(j).text();
+                    rowStr.add(cols.get(j).text());
+                }
+                this.table.add(rowStr);
+            }
+        }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -87,25 +111,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            /*Этот метод выполняется в фоне
-            Тут мы обращаемся к сайту и вытаскиваем его html код
-            */
-            String answer = "";// В эту переменную мы будем класть ответ от сайта. Пока что она пустая
-            String url = "https://www.meteoblue.com/en/weather/outdoorsports/seeing/basel_switzerland_2661604";// Адрес сайта с расписанием
+            String answer = "";
+            String url = "https://www.meteoblue.com/en/weather/outdoorsports/seeing/basel_switzerland_2661604";
             Document document = null;
             try {
                 document = Jsoup.connect(url).get();// Коннектимся и получаем страницу
                 answer = document.body().html();// Получаем код из тега body страницы
-                Elements lines = document.getElementsByAttributeValue("class", "hour-row night");
-                LinkedList<String> htmlLines = new LinkedList<>();
-                //System.out.println(lines.get(1).html());
-                for(int i = 0; i < lines.size(); i++){
-                    htmlLines.add(lines.get(i).html());
-                    System.out.println(htmlLines.get(i));
-                }
-
-                //for()
-
+                Element tab = document.getElementsByClass("table-seeing").get(0);
+                writeTable(tab);
 
             } catch (IOException e) {
                 // Если произошла ошибка, значит вероятнее всего, отсутствует соединение с интернетом
