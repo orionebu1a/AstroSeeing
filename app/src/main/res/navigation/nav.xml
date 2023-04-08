@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_seeing" />
     <fragment
         android:id="@+id/navigation_light_pollution"
-        android:name="com.example.astroseeing.Light_polution"
+        android:name="com.example.astroseeing.Light_pollution"
         android:label="fragment_light_polution"
         tools:layout="@layout/fragment_light_polution" />
     <fragment

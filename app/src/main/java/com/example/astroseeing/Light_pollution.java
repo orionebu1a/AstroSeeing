@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Light_polution#newInstance} factory method to
+ * Use the {@link Light_pollution#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Light_polution extends Fragment {
+public class Light_pollution extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +24,7 @@ public class Light_polution extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Light_polution() {
+    public Light_pollution() {
         // Required empty public constructor
     }
 
@@ -37,8 +37,8 @@ public class Light_polution extends Fragment {
      * @return A new instance of fragment Light_polution.
      */
     // TODO: Rename and change types and number of parameters
-    public static Light_polution newInstance(String param1, String param2) {
-        Light_polution fragment = new Light_polution();
+    public static Light_pollution newInstance(String param1, String param2) {
+        Light_pollution fragment = new Light_pollution();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

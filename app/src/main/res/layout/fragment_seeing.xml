@@ -1,14 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Seeing">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <TableLayout
+        android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:shrinkColumns="*"
+        android:stretchColumns="*"
+        tools:layout_editor_absoluteX="-148dp"
+        tools:layout_editor_absoluteY="158dp">
 
-</FrameLayout>
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="6"
+                android:gravity="center"
+                android:text="Astronomical Seeing"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+        </TableRow>
+
+        <TableRow
+
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:text=""
+                android:textSize="8sp"></TextView>
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:text="Low"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:text="Mid"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:text="High"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+
+            <TextView
+                android:id="@+id/TextView05"
+                android:text="ArcSec"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+
+            <TextView
+                android:id="@+id/textView06"
+                android:text="I1"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+
+            <TextView
+                android:id="@+id/textView07"
+                android:text="I2"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+
+            <TextView
+                android:id="@+id/textView08"
+                android:text="JetSt"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+
+            <TextView
+                android:id="@+id/textView09"
+                android:text="Bot"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+
+            <TextView
+                android:id="@+id/textView10"
+                android:text="Top"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+
+            <TextView
+                android:id="@+id/textView11"
+                android:text="K/100m"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+
+            <TextView
+                android:id="@+id/textView14"
+                android:text="Temp"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+
+            <TextView
+                android:id="@+id/textView14"
+                android:text="RelHum"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:typeface="serif"></TextView>
+        </TableRow>
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
