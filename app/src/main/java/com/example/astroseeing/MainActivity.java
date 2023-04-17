@@ -3,10 +3,13 @@ package com.example.astroseeing;
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentOnAttachListener;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -38,6 +41,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
+    private Getting parser;
     private MyViewModel viewModel;
     public boolean offline;
     public String request;
@@ -51,8 +55,15 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.viewModel = ViewModelProviders.of(this).get(MyViewModel.class);
-        Getting AsyncTask = new Getting(this.viewModel);
-        AsyncTask.execute();
+
+        MutableLiveData<String> place = this.viewModel.getPlace();
+        this.parser = new Getting(this.viewModel);
+        place.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String value) {
+                parser.execute();
+            }
+        });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bot_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

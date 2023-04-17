@@ -1,6 +1,7 @@
 package com.example.astroseeing;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,10 +12,13 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -24,6 +28,9 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class Seeing extends Fragment {
+    private Button updateButton;
+
+    private Getting parser;
     private Table table;
 
     public Seeing() {
@@ -51,11 +58,27 @@ public class Seeing extends Fragment {
         };
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         MyViewModel model = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+        this.parser = new Getting(model);
 //        this.setTable(model.getSelected().getValue());
+
+        View view = inflater.inflate(R.layout.fragment_seeing, container, false);
+        updateButton = view.findViewById(R.id.update_button);
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyViewModel model = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+                EditText place = getActivity().findViewById(R.id.place_input);
+                model.setPlace(place.getText().toString());
+                //parser.execute();
+            }
+        });
+
         model.getSelected().observe(getViewLifecycleOwner(), item -> {
             setTable(item);
             TableLayout tableLayout = getActivity().findViewById(R.id.tableLayout1);
@@ -74,10 +97,20 @@ public class Seeing extends Fragment {
             for(int i = 0; i < 12; i++){
                 column = new TextView(getContext());
                 column.setText(table.data.get(0).get(i));
+                String color = table.colors.get(0).get(i);
+                int color1;
+                try{
+                    color1 = Color.parseColor(color);
+                }
+                catch(Exception e){
+                    color1 = 0;
+                }
+                column.setBackgroundColor(color1);
                 row.addView(column);
             }
             tableLayout.addView(row);
         });
-        return inflater.inflate(R.layout.fragment_seeing, container, false);
+
+        return view;
     }
 }

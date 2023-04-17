@@ -2,6 +2,8 @@ package com.example.astroseeing;
 
 import android.os.AsyncTask;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.jsoup.Jsoup;
@@ -16,7 +18,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 class Getting extends AsyncTask<String, String, String> {
-    private ArrayList<ArrayList<String>> table = new ArrayList<>();
+    private Table table;
 
     private MyViewModel viewModel;
 
@@ -24,12 +26,12 @@ class Getting extends AsyncTask<String, String, String> {
 
     private boolean offline = false;
 
-    public Table getTable() {
+    /*public Table getTable() {
         Table postTable = new Table(table);
         return postTable;
-    }
+    }*/
 
-    public void setTable(ArrayList<ArrayList<String>> table) {
+    public void setTable(Table table) {
         this.table = table;
     }
 
@@ -42,25 +44,29 @@ class Getting extends AsyncTask<String, String, String> {
         this.viewModel = viewModel;
     }
 
-    public Getting(ArrayList<ArrayList<String>> table) {
-        super();
-        this.table = table;
-    }
-
     protected void writeTable(Element tab){
+        this.table = new Table();
         Elements rows = tab.select("tr");
         for (int i = 3; i < show_hours + 3; i++) { //first row is the col names so skip it.
             Element row = rows.get(i);
             Elements cols = row.select("td");
             ArrayList<String> rowStr = new ArrayList<>();
+            ArrayList<String> rowCol = new ArrayList<>();
             for (int j = 1; j <= 12; j++) {
-                cols.get(j).text();
+                String style = cols.get(j).attr("style");
+                if(cols.get(j).hasAttr("style")){
+                    String color = style.split(";")[0].split(" ")[1];
+                    rowCol.add(color);
+                }
+                else{
+                    rowCol.add("#fff");
+                }
                 rowStr.add(cols.get(j).text());
             }
-            this.table.add(rowStr);
+            this.table.data.add(rowStr);
+            this.table.colors.add(rowCol);
         }
-        Table tablePacked = new Table(this.table);
-        this.viewModel.select(tablePacked);
+        this.viewModel.select(table);
     }
     @Override
     protected void onPreExecute() {
@@ -70,8 +76,11 @@ class Getting extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... params) {
         String answer = "";
-        String url = "https://www.meteoblue.com/en/weather/outdoorsports/seeing/basel_switzerland_2661604";
-        Document document = null;
+        MutableLiveData<String> a = viewModel.getPlace();
+        String place = a.getValue();
+        Document document;
+        String url = "https://www.meteoblue.com/en/weather/outdoorsports/seeing/" + place;
+
         try {
             document = Jsoup.connect(url).get();// Коннектимся и получаем страницу
             answer = document.body().html();// Получаем код из тега body страницы
