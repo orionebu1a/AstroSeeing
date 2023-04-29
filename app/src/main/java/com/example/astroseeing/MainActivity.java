@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -55,12 +56,15 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.viewModel = ViewModelProviders.of(this).get(MyViewModel.class);
+        this.viewModel.setDb(getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null));
+
+        this.viewModel.getDb().execSQL("CREATE TABLE IF NOT EXISTS places (city TEXT, url TEXT)");
 
         MutableLiveData<String> place = this.viewModel.getPlace();
-        this.parser = new Getting(this.viewModel);
         place.observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String value) {
+                parser = new Getting(viewModel);
                 parser.execute();
             }
         });

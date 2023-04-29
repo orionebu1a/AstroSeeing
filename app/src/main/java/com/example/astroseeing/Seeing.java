@@ -65,8 +65,6 @@ public class Seeing extends Fragment {
                              Bundle savedInstanceState) {
         MyViewModel model = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
         this.parser = new Getting(model);
-//        this.setTable(model.getSelected().getValue());
-
         View view = inflater.inflate(R.layout.fragment_seeing, container, false);
         updateButton = view.findViewById(R.id.update_button);
         updateButton.setOnClickListener(new View.OnClickListener() {
@@ -75,40 +73,41 @@ public class Seeing extends Fragment {
                 MyViewModel model = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
                 EditText place = getActivity().findViewById(R.id.place_input);
                 model.setPlace(place.getText().toString());
-                //parser.execute();
+                model.setPlaces(place.getText().toString());
             }
         });
 
         model.getSelected().observe(getViewLifecycleOwner(), item -> {
             setTable(item);
             TableLayout tableLayout = getActivity().findViewById(R.id.tableLayout1);
+            tableLayout.removeAllViews();
             if(tableLayout.getChildCount() > 2){
                 for(int i = 2; i < tableLayout.getChildCount(); i++)
                 {
                     tableLayout.removeViewAt(i);
                 }
             }
-
-            TableRow row = new TableRow(getContext());
-            TextView column = new TextView(getContext());
-            column.setText("Now");
-            row.addView(column);
-
-            for(int i = 0; i < 12; i++){
-                column = new TextView(getContext());
-                column.setText(table.data.get(0).get(i));
-                String color = table.colors.get(0).get(i);
-                int color1;
-                try{
-                    color1 = Color.parseColor(color);
-                }
-                catch(Exception e){
-                    color1 = 0;
-                }
-                column.setBackgroundColor(color1);
+            for(int j = 0; j < 10; j++) {
+                TableRow row = new TableRow(getContext());
+                TextView column = new TextView(getContext());
+                String number = String.valueOf(j);
+                column.setText(number);
                 row.addView(column);
+                for (int i = 0; i < 12; i++) {
+                    int color1;
+                    try {
+                        column = new TextView(getContext());
+                        column.setText(table.data.get(j).get(i));
+                        String color = table.colors.get(j).get(i);
+                        color1 = Color.parseColor(color);
+                    } catch (Exception e) {
+                        color1 = 0;
+                    }
+                    column.setBackgroundColor(color1);
+                    row.addView(column);
+                }
+                tableLayout.addView(row);
             }
-            tableLayout.addView(row);
         });
 
         return view;

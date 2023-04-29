@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,7 +23,7 @@ class Getting extends AsyncTask<String, String, String> {
 
     private MyViewModel viewModel;
 
-    private int show_hours = 1;
+    private int show_hours = 24;
 
     private boolean offline = false;
 
@@ -47,11 +48,14 @@ class Getting extends AsyncTask<String, String, String> {
     protected void writeTable(Element tab){
         this.table = new Table();
         Elements rows = tab.select("tr");
-        for (int i = 3; i < show_hours + 3; i++) { //first row is the col names so skip it.
+        for (int i = 3; i < show_hours * 11 + 3; i = i + 11) { //first row is the col names so skip it.
             Element row = rows.get(i);
             Elements cols = row.select("td");
             ArrayList<String> rowStr = new ArrayList<>();
             ArrayList<String> rowCol = new ArrayList<>();
+            if(cols.size() < 12){
+                break;
+            }
             for (int j = 1; j <= 12; j++) {
                 String style = cols.get(j).attr("style");
                 if(cols.get(j).hasAttr("style")){
@@ -76,17 +80,34 @@ class Getting extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... params) {
         String answer = "";
-        MutableLiveData<String> a = viewModel.getPlace();
-        String place = a.getValue();
+        MutableLiveData<String> placeBuf = viewModel.getPlace();
+        String place = placeBuf.getValue();
         Document document;
-        String url = "https://www.meteoblue.com/en/weather/outdoorsports/seeing/" + place;
+        String preUrl = "https://yandex.ru/search/?text=" + place + "+" + "meteoblue" + "astronomical" + "seeing";
+        //preUrl = "https://www.youtube.com";
+        String href = "https://www.meteoblue.com/ru/%D0%BF%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0/outdoorsports/seeing/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_524901";;
+        try {
+            Connection jsoup = Jsoup.connect(preUrl);
+            document = jsoup.get();
+            answer = document.body().html();// Получаем код из тега body страницы
+            Element preres = document.getElementsByClass("serp-item__title").get(0);
+            //Element ref = res.getElementsByTag("href").get(0);
+            Element res = preres.getElementsByAttribute("href").get(0);
+            href = res.attr("href");
+            int b = 0;
+        } catch (Exception e) {
+            System.out.println("not");
+        }
 
+        //String url = a.getValue();
+        String url = href;
         try {
             document = Jsoup.connect(url).get();// Коннектимся и получаем страницу
             answer = document.body().html();// Получаем код из тега body страницы
             Element tab = document.getElementsByClass("table-seeing").get(0);
             writeTable(tab);
-        } catch (IOException e) {
+        } catch (Exception e) {
+
         }
         return answer;
     }
