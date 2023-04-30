@@ -11,6 +11,9 @@ import javax.security.auth.callback.Callback;
 
 public class MyViewModel extends ViewModel {
     private SQLiteDatabase db;
+
+    private final MutableLiveData<Double> latitude = new MutableLiveData<Double>();
+    private final MutableLiveData<Double> longitude = new MutableLiveData<Double>();
     private final MutableLiveData<Table> selected = new MutableLiveData<Table>();
     private final MutableLiveData<String> place = new MutableLiveData<String>();
 
@@ -18,6 +21,14 @@ public class MyViewModel extends ViewModel {
     public void select(Table item) {
 //        selected.setValue(item);
         selected.postValue(item);
+    }
+
+    public MutableLiveData<Double> getLatitude() {
+        return latitude;
+    }
+
+    public MutableLiveData<Double> getLongitude() {
+        return longitude;
     }
 
     public SQLiteDatabase getDb() {
@@ -53,5 +64,10 @@ public class MyViewModel extends ViewModel {
 
     public MutableLiveData<Table> getSelected() {
         return selected;
+    }
+
+    public void setLocation(double latitude, double longitude){
+        this.latitude.postValue(latitude);
+        this.longitude.postValue(longitude);
     }
 }

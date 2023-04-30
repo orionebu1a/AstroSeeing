@@ -56,7 +56,7 @@ class Getting extends AsyncTask<String, String, String> {
             if(cols.size() < 12){
                 break;
             }
-            for (int j = 1; j <= 12; j++) {
+            for (int j = 0; j <= 12; j++) {
                 String style = cols.get(j).attr("style");
                 if(cols.get(j).hasAttr("style")){
                     String color = style.split(";")[0].split(" ")[1];
@@ -83,7 +83,7 @@ class Getting extends AsyncTask<String, String, String> {
         MutableLiveData<String> placeBuf = viewModel.getPlace();
         String place = placeBuf.getValue();
         Document document;
-        String preUrl = "https://yandex.ru/search/?text=" + place + "+" + "meteoblue" + "astronomical" + "seeing";
+        /*String preUrl = "https://yandex.ru/search/?text=" + place + "+" + "meteoblue" + "astronomical" + "seeing";
         //preUrl = "https://www.youtube.com";
         String href = "https://www.meteoblue.com/ru/%D0%BF%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0/outdoorsports/seeing/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_524901";;
         try {
@@ -100,8 +100,25 @@ class Getting extends AsyncTask<String, String, String> {
         }
 
         //String url = a.getValue();
-        String url = href;
+        String url = href;*/
+        String url;
         try {
+            double latitude = viewModel.getLatitude().getValue();
+            double longitude = viewModel.getLongitude().getValue();
+            String latit, longit;
+            if(latitude > 0){
+                latit = String.format("%.3f", latitude) + "E";
+            }
+            else{
+                latit = String.format("%.3f", -latitude) + "W";
+            }
+            if(longitude > 0){
+                longit = String.format("%.3f", longitude) + "S";
+            }
+            else{
+                longit = String.format("%.3f", 180 + longitude) + "N";
+            }
+            url = "https://www.meteoblue.com/en/weather/outdoorsports/seeing/" + longit + latit;
             document = Jsoup.connect(url).get();// Коннектимся и получаем страницу
             answer = document.body().html();// Получаем код из тега body страницы
             Element tab = document.getElementsByClass("table-seeing").get(0);

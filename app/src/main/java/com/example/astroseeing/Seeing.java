@@ -5,7 +5,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.text.Layout;
@@ -64,16 +67,28 @@ public class Seeing extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         MyViewModel model = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
-        this.parser = new Getting(model);
         View view = inflater.inflate(R.layout.fragment_seeing, container, false);
         updateButton = view.findViewById(R.id.update_button);
+
+        MutableLiveData<Double> longitude = model.getLongitude();
+        longitude.observe(getViewLifecycleOwner(), new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double value) {
+                TextView text = view.findViewById(R.id.textView2);
+                String location = "longitude: " + model.getLongitude().getValue().toString()
+                        + "\n latitude: " + model.getLatitude().getValue().toString();
+                text.setText(location);
+            }
+        });
+
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                updateButton.setText(getResources().getString(R.string.loading_text));
+                updateButton.setBackgroundColor(getResources().getColor(R.color.loadingColor));
                 MyViewModel model = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
-                EditText place = getActivity().findViewById(R.id.place_input);
-                model.setPlace(place.getText().toString());
-                model.setPlaces(place.getText().toString());
+                parser = new Getting(model);
+                parser.execute();
             }
         });
 
@@ -87,13 +102,13 @@ public class Seeing extends Fragment {
                     tableLayout.removeViewAt(i);
                 }
             }
-            for(int j = 0; j < 10; j++) {
+            for(int j = 0; j < table.data.size(); j++) {
                 TableRow row = new TableRow(getContext());
                 TextView column = new TextView(getContext());
-                String number = String.valueOf(j);
-                column.setText(number);
-                row.addView(column);
-                for (int i = 0; i < 12; i++) {
+                //String number = String.valueOf(j);
+                //column.setText(number);
+                //row.addView(column);
+                for(int i = 0; i < table.data.get(j).size(); i++) {
                     int color1;
                     try {
                         column = new TextView(getContext());
@@ -107,6 +122,8 @@ public class Seeing extends Fragment {
                     row.addView(column);
                 }
                 tableLayout.addView(row);
+                updateButton.setBackgroundColor(getResources().getColor(R.color.down_choser));
+                updateButton.setText(getResources().getString(R.string.update_data));
             }
         });
 
