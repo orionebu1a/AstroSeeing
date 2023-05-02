@@ -70,16 +70,19 @@ public class Seeing extends Fragment {
         View view = inflater.inflate(R.layout.fragment_seeing, container, false);
         updateButton = view.findViewById(R.id.update_button);
 
-        MutableLiveData<Double> longitude = model.getLongitude();
-        longitude.observe(getViewLifecycleOwner(), new Observer<Double>() {
+        MutableLiveData<String> location = model.getLocation();
+        location.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onChanged(@Nullable Double value) {
+            public void onChanged(@Nullable String value) {
                 TextView text = view.findViewById(R.id.textView2);
-                String location = "longitude: " + model.getLongitude().getValue().toString()
-                        + "\n latitude: " + model.getLatitude().getValue().toString();
-                text.setText(location);
+                String loc = "location: " + model.getLocation().getValue();
+                text.setText(loc);
             }
         });
+
+        TextView text = view.findViewById(R.id.textView2);
+        String loc = "location: " + model.getLocation().getValue();
+        text.setText(loc);
 
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override

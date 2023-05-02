@@ -140,7 +140,22 @@ public class MainActivity extends AppCompatActivity {
                     if (location == null) {
                         requestNewLocationData();
                     } else {
-                        viewModel.setLocation(location.getLatitude(), location.getLongitude());
+                        double latitude = location.getLatitude();
+                        double longitude = location.getLongitude();
+                        String latit, longit;
+                        if(latitude > 0){
+                            latit = String.format("%.3f", latitude) + "E";
+                        }
+                        else{
+                            latit = String.format("%.3f", -latitude) + "W";
+                        }
+                        if(longitude > 0){
+                            longit = String.format("%.3f", longitude) + "S";
+                        }
+                        else{
+                            longit = String.format("%.3f", 180 + longitude) + "N";
+                        }
+                        viewModel.setLocation(longit + latit);
                     }
                 }
             });

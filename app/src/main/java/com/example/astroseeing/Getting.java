@@ -103,22 +103,8 @@ class Getting extends AsyncTask<String, String, String> {
         String url = href;*/
         String url;
         try {
-            double latitude = viewModel.getLatitude().getValue();
-            double longitude = viewModel.getLongitude().getValue();
-            String latit, longit;
-            if(latitude > 0){
-                latit = String.format("%.3f", latitude) + "E";
-            }
-            else{
-                latit = String.format("%.3f", -latitude) + "W";
-            }
-            if(longitude > 0){
-                longit = String.format("%.3f", longitude) + "S";
-            }
-            else{
-                longit = String.format("%.3f", 180 + longitude) + "N";
-            }
-            url = "https://www.meteoblue.com/en/weather/outdoorsports/seeing/" + longit + latit;
+            String location = viewModel.getLocation().getValue();
+            url = "https://www.meteoblue.com/en/weather/outdoorsports/seeing/" + location;
             document = Jsoup.connect(url).get();// Коннектимся и получаем страницу
             answer = document.body().html();// Получаем код из тега body страницы
             Element tab = document.getElementsByClass("table-seeing").get(0);
