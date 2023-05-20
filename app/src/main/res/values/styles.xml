@@ -3,4 +3,7 @@
     <style name="RoundedCornerButton" parent="@style/Widget.AppCompat.Button.Colored">
         <item name="android:background">@drawable/button_inset</item>
     </style>
+    <style name="PressedRoundedButton" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/button_inset_pressed</item>
+    </style>
 </resources>

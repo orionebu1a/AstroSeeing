@@ -10,7 +10,7 @@
     <ImageButton
         android:clickable="true"
         android:id="@+id/help"
-        style="@style/RoundedCornerButton"
+        android:background="@drawable/help_button_selector"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="56dp"

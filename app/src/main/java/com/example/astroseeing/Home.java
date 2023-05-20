@@ -46,7 +46,7 @@ public class Home extends Fragment {
         ImageButton helpButton = view.findViewById(R.id.help);
         TextView help = view.findViewById(R.id.helper);
         helpButton.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
+            @SuppressLint({"ResourceAsColor", "ResourceType"})
             @Override
             public void onClick(View view) {
                 if(!show_help){

@@ -27,11 +27,6 @@ class Getting extends AsyncTask<String, String, String> {
 
     private boolean offline = false;
 
-    /*public Table getTable() {
-        Table postTable = new Table(table);
-        return postTable;
-    }*/
-
     public void setTable(Table table) {
         this.table = table;
     }
@@ -83,24 +78,6 @@ class Getting extends AsyncTask<String, String, String> {
         MutableLiveData<String> placeBuf = viewModel.getPlace();
         String place = placeBuf.getValue();
         Document document;
-        /*String preUrl = "https://yandex.ru/search/?text=" + place + "+" + "meteoblue" + "astronomical" + "seeing";
-        //preUrl = "https://www.youtube.com";
-        String href = "https://www.meteoblue.com/ru/%D0%BF%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0/outdoorsports/seeing/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_524901";;
-        try {
-            Connection jsoup = Jsoup.connect(preUrl);
-            document = jsoup.get();
-            answer = document.body().html();// Получаем код из тега body страницы
-            Element preres = document.getElementsByClass("serp-item__title").get(0);
-            //Element ref = res.getElementsByTag("href").get(0);
-            Element res = preres.getElementsByAttribute("href").get(0);
-            href = res.attr("href");
-            int b = 0;
-        } catch (Exception e) {
-            System.out.println("not");
-        }
-
-        //String url = a.getValue();
-        String url = href;*/
         String url;
         try {
             String location = viewModel.getLocation().getValue();
