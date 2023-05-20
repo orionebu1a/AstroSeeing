@@ -43,7 +43,7 @@ class Getting extends AsyncTask<String, String, String> {
     protected void writeTable(Element tab){
         this.table = new Table();
         Elements rows = tab.select("tr");
-        for (int i = 3; i < show_hours * 11 + 3; i = i + 11) { //first row is the col names so skip it.
+        for (int i = 3; i < show_hours * 11 + 3; i = i + 11) {
             Element row = rows.get(i);
             Elements cols = row.select("td");
             ArrayList<String> rowStr = new ArrayList<>();
@@ -80,14 +80,14 @@ class Getting extends AsyncTask<String, String, String> {
         Document document;
         String url;
         try {
-            String location = viewModel.getLocation().getValue();
+            String location = viewModel.getLocation().getValue(); //получаем локацию(координаты)
             url = "https://www.meteoblue.com/en/weather/outdoorsports/seeing/" + location;
+            //составляем ссылку
             document = Jsoup.connect(url).get();// Коннектимся и получаем страницу
             answer = document.body().html();// Получаем код из тега body страницы
-            Element tab = document.getElementsByClass("table-seeing").get(0);
-            writeTable(tab);
+            Element tab = document.getElementsByClass("table-seeing").get(0); //выделяем таблицу
+            writeTable(tab); //кладём её в наше приложение
         } catch (Exception e) {
-
         }
         return answer;
     }
