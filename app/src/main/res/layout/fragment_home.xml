@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
+    <ImageButton
+        android:clickable="true"
+        android:id="@+id/help"
+        style="@style/RoundedCornerButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="28dp"
+        android:src="@drawable/baseline_question_mark_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:textColor="@color/common_google_signin_btn_text_dark"
+        android:background="@color/helper"
+        android:visibility="invisible"
+        android:id="@+id/helper"
+        android:layout_width="300dp"
+        android:textSize="20sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/help" />
 </androidx.constraintlayout.widget.ConstraintLayout>

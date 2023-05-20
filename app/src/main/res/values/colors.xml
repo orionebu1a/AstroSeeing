@@ -10,4 +10,7 @@
     <color name="down_choser">#E3E3E3</color>
     <color name="checked">#F16464</color>
     <color name="loadingColor">#C8FFC8</color>
+    <color name="help">#4C2E81</color>
+    <color name="helper">#624498</color>
+    <color name="no_color">#00624498</color>
 </resources>

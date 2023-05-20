@@ -6,4 +6,11 @@
     <string name="loading_text">loading...</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="update_data">UPDATE DATA</string>
+    <string name="help_str">This app help you to get astronomical seeing conditions in your location in near hours:\n
+- Cloud cover for 3 different layers (0-4 km asl, 4-8 km asl, 8-15 km asl) ;\n
+- Seeing indexes computed based on the integration of turbulent layers in the atmosphere (in review) ;\n
+- Jet Stream: high speeds (>35m/s) usually correspond to bad seeing ;\n
+- Ground Temperature;\n
+        Enjoy it:)
+</string>
 </resources>

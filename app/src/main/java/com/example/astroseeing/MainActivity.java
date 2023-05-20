@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        openFragment(Home.newInstance("", ""));
+                        openFragment(Home.newInstance());
                         return true;
                     case R.id.navigation_seeing:
                         openFragment(Seeing.newInstance());
