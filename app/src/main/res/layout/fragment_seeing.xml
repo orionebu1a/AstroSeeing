@@ -10,11 +10,12 @@
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="130dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:entries="@array/spinner2_array"
         app:layout_constraintBottom_toTopOf="@+id/update_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/spinner"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
@@ -30,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@id/tableLayout1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2"/>
+        app:layout_constraintTop_toBottomOf="@id/spinner"/>
 
     <TableLayout
         android:id="@+id/tableLayout1"
@@ -45,104 +46,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/update_button">
-
-        <TableRow
-
-            android:id="@+id/tableRow1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/TextView01"
-                android:text="Time"
-                android:textStyle="bold"
-                android:typeface="serif"
-                android:textSize="8sp"></TextView>
-
-            <TextView
-                android:id="@+id/TextView02"
-                android:text="Low"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-
-            <TextView
-                android:id="@+id/TextView03"
-                android:text="Mid"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-
-            <TextView
-                android:id="@+id/TextView04"
-                android:text="High"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-
-            <TextView
-                android:id="@+id/TextView05"
-                android:text="ArcSec"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-
-            <TextView
-                android:id="@+id/textView06"
-                android:text="I1"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-
-            <TextView
-                android:id="@+id/textView07"
-                android:text="I2"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-
-            <TextView
-                android:id="@+id/textView08"
-                android:text="JetSt"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-
-            <TextView
-                android:id="@+id/textView09"
-                android:text="Bot"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-
-            <TextView
-                android:id="@+id/textView10"
-                android:text="Top"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-
-            <TextView
-                android:id="@+id/textView11"
-                android:text="K/100m"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-
-            <TextView
-                android:id="@+id/textView14"
-                android:text="Temp"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-
-            <TextView
-                android:id="@+id/textView15"
-                android:text="RelHum"
-                android:textSize="8sp"
-                android:textStyle="bold"
-                android:typeface="serif"></TextView>
-        </TableRow>
     </TableLayout>
 
     <TextView
@@ -160,9 +63,8 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:entries="@array/spinner_array"

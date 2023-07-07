@@ -27,6 +27,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -113,6 +114,17 @@ public class Seeing extends Fragment {
         String loc = "location: " + model.getLocation().getValue();
         text.setText(loc);
 
+        Spinner spinner2 = view.findViewById(R.id.spinner2);
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                model.setDay(i);
+            }
+
+            @Override public void onNothingSelected(AdapterView<?> adapterView) {
+                model.setDay(0);
+            }
+        });
+
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,16 +139,10 @@ public class Seeing extends Fragment {
 
         model.getSelected().observe(getViewLifecycleOwner(), item -> {
             setTable(item);
+            Spinner spinner = view.findViewById(R.id.spinner);
             TableLayout tableLayout = getActivity().findViewById(R.id.tableLayout1);
             tableLayout.removeAllViews();
-            /*if(tableLayout.getChildCount() > 1){
-                int c = tableLayout.getChildCount();
-                for(int i = 1; i < c; i++)
-                {
-                    tableLayout.removeViewAt(1);
-                }
-            }*/
-            Spinner spinner = getActivity().findViewById(R.id.spinner);
+            int size = 15;
             int [] arr;
             int [] arr1 = {0, 1, 2, 3, 4, 5, 6};
             int [] arr2 = {0, 5, 6};
@@ -149,6 +155,7 @@ public class Seeing extends Fragment {
             }
             else{
                 arr = arr3;
+                size = 11;
             }
             TextView column;
             TableRow row = new TableRow(getContext());
@@ -156,6 +163,7 @@ public class Seeing extends Fragment {
             for (int i : arr) {
                 column = new TextView(getContext());
                 column.setText(tableHeader[i]);
+                column.setTextSize(size);
                 row.addView(column);
             }
             tableLayout.addView(row);
@@ -167,6 +175,7 @@ public class Seeing extends Fragment {
                     try {
                         column = new TextView(getContext());
                         column.setText(table.data.get(j).get(i));
+                        column.setTextSize(size);
                         String color = table.colors.get(j).get(i);
                         color1 = Color.parseColor(color);
                     } catch (Exception e) {

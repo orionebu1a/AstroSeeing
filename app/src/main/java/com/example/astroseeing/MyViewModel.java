@@ -11,6 +11,8 @@ import javax.security.auth.callback.Callback;
 
 public class MyViewModel extends ViewModel {
     private SQLiteDatabase db;
+
+    private final MutableLiveData<Integer> day = new MutableLiveData<Integer>();
     private final MutableLiveData<String> location = new MutableLiveData<String>();
     private final MutableLiveData<Table> selected = new MutableLiveData<Table>();
     private final MutableLiveData<String> place = new MutableLiveData<String>();
@@ -50,6 +52,14 @@ public class MyViewModel extends ViewModel {
         while(buf.moveToNext()) {
             System.out.println(buf.getString(0));
         }
+    }
+
+    public MutableLiveData<Integer> getDay() {
+        return day;
+    }
+
+    public void setDay(Integer day) {
+        this.day.postValue(day);
     }
 
     public MutableLiveData<Table> getSelected() {

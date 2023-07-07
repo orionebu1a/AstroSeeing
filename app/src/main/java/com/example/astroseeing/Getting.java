@@ -23,7 +23,7 @@ class Getting extends AsyncTask<String, String, String> {
 
     private MyViewModel viewModel;
 
-    private int show_hours = 24;
+    private int show_hours = 24 * 3;
 
     private boolean offline = false;
 
@@ -40,16 +40,16 @@ class Getting extends AsyncTask<String, String, String> {
         this.viewModel = viewModel;
     }
 
-    protected void writeTable(Element tab){
+    protected void writeTable(Elements tab){
         this.table = new Table();
-        Elements rows = tab.select("tr");
-        for (int i = 3; i < show_hours * 11 + 3; i = i + 11) {
+        Elements rows = tab.get(0).getElementsByClass("hour-row");
+        for (int i = 3; i < show_hours && i < rows.size(); i++) {
             Element row = rows.get(i);
             Elements cols = row.select("td");
             ArrayList<String> rowStr = new ArrayList<>();
             ArrayList<String> rowCol = new ArrayList<>();
             if(cols.size() < 12){
-                break;
+                continue;
             }
             for (int j = 0; j <= 12; j++) {
                 String style = cols.get(j).attr("style");
@@ -85,9 +85,10 @@ class Getting extends AsyncTask<String, String, String> {
             //составляем ссылку
             document = Jsoup.connect(url).get();// Коннектимся и получаем страницу
             answer = document.body().html();// Получаем код из тега body страницы
-            Element tab = document.getElementsByClass("table-seeing").get(0); //выделяем таблицу
-            writeTable(tab); //кладём её в наше приложение
+            Elements tab = document.getElementsByClass("table-seeing");
+            writeTable(tab);
         } catch (Exception e) {
+            int a = 1;
         }
         return answer;
     }
