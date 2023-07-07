@@ -7,20 +7,6 @@
     tools:context=".Seeing">
 
 
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:entries="@array/spinner2_array"
-        app:layout_constraintBottom_toTopOf="@+id/update_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/spinner"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.0" />
-
     <Button
         android:id="@+id/update_button"
         android:layout_width="150dp"
@@ -28,31 +14,41 @@
         android:shadowColor="@color/down_choser"
         android:text="@string/update_data"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/tableLayout1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner"/>
+        app:layout_constraintTop_toBottomOf="@id/spinner" />
 
-    <TableLayout
-        android:id="@+id/tableLayout1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:shrinkColumns="*"
-        android:stretchColumns="*"
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/update_button">
-    </TableLayout>
+        app:layout_constraintTop_toBottomOf="@+id/update_button">
+
+        <TableLayout
+            android:id="@+id/tableLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:shrinkColumns="*"
+            android:stretchColumns="*"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/update_button"></TableLayout>
+    </ScrollView>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
         android:text="Current location"
         android:textSize="20sp"
@@ -69,7 +65,7 @@
         android:layout_marginBottom="10dp"
         android:entries="@array/spinner_array"
         app:layout_constraintBottom_toTopOf="@+id/update_button"
-        app:layout_constraintEnd_toStartOf="@+id/spinner2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 

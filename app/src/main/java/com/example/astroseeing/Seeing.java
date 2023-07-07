@@ -114,17 +114,6 @@ public class Seeing extends Fragment {
         String loc = "location: " + model.getLocation().getValue();
         text.setText(loc);
 
-        Spinner spinner2 = view.findViewById(R.id.spinner2);
-        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                model.setDay(i);
-            }
-
-            @Override public void onNothingSelected(AdapterView<?> adapterView) {
-                model.setDay(0);
-            }
-        });
-
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -189,7 +178,6 @@ public class Seeing extends Fragment {
                 updateButton.setText(getResources().getString(R.string.update_data));
             }
         });
-
         return view;
     }
     private void getLastLocation() {

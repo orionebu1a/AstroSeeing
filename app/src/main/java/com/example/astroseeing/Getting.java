@@ -88,7 +88,6 @@ class Getting extends AsyncTask<String, String, String> {
             Elements tab = document.getElementsByClass("table-seeing");
             writeTable(tab);
         } catch (Exception e) {
-            int a = 1;
         }
         return answer;
     }
