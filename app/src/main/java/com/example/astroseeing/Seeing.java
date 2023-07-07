@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -128,19 +129,40 @@ public class Seeing extends Fragment {
             setTable(item);
             TableLayout tableLayout = getActivity().findViewById(R.id.tableLayout1);
             tableLayout.removeAllViews();
-            if(tableLayout.getChildCount() > 2){
-                for(int i = 2; i < tableLayout.getChildCount(); i++)
+            /*if(tableLayout.getChildCount() > 1){
+                int c = tableLayout.getChildCount();
+                for(int i = 1; i < c; i++)
                 {
-                    tableLayout.removeViewAt(i);
+                    tableLayout.removeViewAt(1);
                 }
+            }*/
+            Spinner spinner = getActivity().findViewById(R.id.spinner);
+            int [] arr;
+            int [] arr1 = {0, 1, 2, 3, 4, 5, 6};
+            int [] arr2 = {0, 5, 6};
+            int [] arr3 = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+            if(spinner.getSelectedItemPosition() == 1) {
+                arr = arr1;
             }
-            for(int j = 0; j < table.data.size(); j++) {
-                TableRow row = new TableRow(getContext());
-                TextView column = new TextView(getContext());
-                //String number = String.valueOf(j);
-                //column.setText(number);
-                //row.addView(column);
-                for(int i = 0; i < table.data.get(j).size(); i++) {
+            else if(spinner.getSelectedItemPosition() == 2){
+                arr = arr2;
+            }
+            else{
+                arr = arr3;
+            }
+            TextView column;
+            TableRow row = new TableRow(getContext());
+            String[] tableHeader = getResources().getStringArray(R.array.table_array);
+            for (int i : arr) {
+                column = new TextView(getContext());
+                column.setText(tableHeader[i]);
+                row.addView(column);
+            }
+            tableLayout.addView(row);
+            for (int j = 0; j < table.data.size(); j++) {
+                row = new TableRow(getContext());
+                column = new TextView(getContext());
+                for (int i : arr) {
                     int color1;
                     try {
                         column = new TextView(getContext());

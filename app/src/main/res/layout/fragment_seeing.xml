@@ -7,6 +7,19 @@
     tools:context=".Seeing">
 
 
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:entries="@array/spinner2_array"
+        app:layout_constraintBottom_toTopOf="@+id/update_button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/update_button"
         android:layout_width="150dp"
@@ -29,6 +42,7 @@
         android:stretchColumns="*"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/update_button">
 
@@ -40,7 +54,9 @@
 
             <TextView
                 android:id="@+id/TextView01"
-                android:text=""
+                android:text="Time"
+                android:textStyle="bold"
+                android:typeface="serif"
                 android:textSize="8sp"></TextView>
 
             <TextView
@@ -141,5 +157,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:entries="@array/spinner_array"
+        app:layout_constraintBottom_toTopOf="@+id/update_button"
+        app:layout_constraintEnd_toStartOf="@+id/spinner2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

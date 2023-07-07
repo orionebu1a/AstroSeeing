@@ -6,6 +6,31 @@
     <string name="loading_text">loading...</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="update_data">UPDATE DATA</string>
+    <string-array name="spinner_array">
+        <item>All params</item>
+        <item>Important</item>
+        <item>Only indexes</item>
+    </string-array>
+    <string-array name="spinner2_array">
+        <item>Today</item>
+        <item>Today + next</item>
+        <item>all available</item>
+    </string-array>
+    <string-array name="table_array">
+        <item>Time</item>
+        <item>Low</item>
+        <item>Mid</item>
+        <item>High</item>
+        <item>Arcsec</item>
+        <item>I1</item>
+        <item>I2</item>
+        <item>JetSt</item>
+        <item>Bot</item>
+        <item>Top</item>
+        <item>K/100m</item>
+        <item>Temp</item>
+        <item>RelHum</item>
+    </string-array>
     <string name="help_str">This app help you to get astronomical seeing conditions in your location in near hours:\n
 - Cloud cover for 3 different layers (0-4 km asl, 4-8 km asl, 8-15 km asl) ;\n
 - Seeing indexes computed based on the integration of turbulent layers in the atmosphere (in review) ;\n
